@@ -1,0 +1,69 @@
+<html>
+<head>
+	<title>주간업무보고</title>
+
+
+<script>
+function testFunc() {
+	alert("aaa");
+	return false;
+}
+
+function chk_report_value(the_frm)
+{
+	if(the_frm.name.selectedIndex == 0)
+	{
+		alert("이름을 선택하세요.");
+		the_frm.name.focus();
+		return false;
+	}
+	
+	if(the_frm.reportid.selectedIndex == 0)
+	{
+		alert("기간을 선택하세요.");
+		the_frm.reportid.focus();
+		return false;
+	}
+	
+	if(the_frm.completed.value.length == 0)
+	{
+		alert("이번주에 한일을 입력해주세요.");
+		the_frm.completed.focus();
+		return false;
+	}
+	if(the_frm.todo.value.length == 0)
+	{
+		alert("다음주에 할일을 입력해주세요.");
+		the_frm.todo.focus();
+		return false;
+	}
+	return true;
+}
+</script>
+
+</head>
+
+<body>
+	<h1>주간업무보고...dbg22</h1>
+	<form id="report" name="report" action="/report" method="post" onsubmit="return chk_report_value(this);">
+		<select name="name">
+			<option value="">이름</option>
+			{{range .}}
+			<option value="{{.Name}}">{{.Name}}</option>
+			{{end}}
+		</select>
+		<select name="reportid">
+			<option value="">차수(기간)</option>
+			<option value="130501">5월1주차(6~10)</option>
+		</select>
+		</br>
+		<label for="completed">이번주에 한일</label></br>
+		<textarea name="completed" rows=10 cols=81></textarea></br>
+		<label for="todo">다음주에 할일</label></br>
+		<textarea name="todo" rows=10 cols=81></textarea></br>		
+		<input type="submit" id="submit" name="submit" value="제출" />
+		<input type="reset" value="다시작성" />
+	</form>
+</body>
+
+</html>
